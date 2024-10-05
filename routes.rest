@@ -1,20 +1,32 @@
 ### Add a New Item
+### Add a New Item
 POST http://localhost:5000/api/items
 Content-Type: application/json
 
 {
-    "name": "Sample Item",
-    "description": "This is a sample item for testing."
+    "name": "Samsung phone",
+    "description": "High-quality phone with 1TB space.",
+    "price": 200.99,
+    "category": "Electronics",
+    "stock": 13,
+    "brand": "samsung",
+    "sku": "suk-12304"
 }
 
 ### Update an Item
-PUT http://localhost:5000/api/items/66fe080bfa9da2c6a4b4cc05
+### Update an Existing Item
+PUT http://localhost:5000/api/items/67008d2223ff7e64788a0417
 Content-Type: application/json
 
 {
-    "name": "Micheal Edwards",
-    "description": "this is an update"
+    "name": "Wireless Headphones Pro",
+    "description": "Updated version of high-quality over-ear wireless headphones with enhanced noise cancellation.",
+    "price": 149.99,
+    "category": "Electronics",
+    "stock": 15,
+    "brand": "SoundMax",
+    "sku": "SMX-H1000-Pro"
 }
 
 ### Delete an Item
-DELETE http://localhost:5000/api/items/
+DELETE http://localhost:5000/api/items/66fe0806fa9da2c6a4b4cc01
