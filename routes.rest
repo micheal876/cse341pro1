@@ -4,29 +4,29 @@ POST http://localhost:5000/api/items
 Content-Type: application/json
 
 {
-    "name": "Samsung phone",
-    "description": "High-quality phone with 1TB space.",
-    "price": 200.99,
+    "name": "iphone 13 pro max",
+    "description": "High-quality phone with 1TB space 6g ram.",
+    "price": 1000.99,
     "category": "Electronics",
-    "stock": 13,
-    "brand": "samsung",
-    "sku": "suk-12304"
+    "stock": 34,
+    "brand": "iphone",
+    "sku": "suk-568930"
 }
 
 ### Update an Item
 ### Update an Existing Item
-PUT http://localhost:5000/api/items/67008d2223ff7e64788a0417
+PUT http://localhost:5000/api/items/67013160d07788fecea3d75a
 Content-Type: application/json
 
 {
-    "name": "Wireless Headphones Pro",
-    "description": "Updated version of high-quality over-ear wireless headphones with enhanced noise cancellation.",
-    "price": 149.99,
+    "name": "iphone 13 pro max",
+    "description": "High-quality phone with 1TB space 6g ram.",
+    "price": 500.99,
     "category": "Electronics",
-    "stock": 15,
-    "brand": "SoundMax",
-    "sku": "SMX-H1000-Pro"
+    "stock": 34,
+    "brand": "iphone",
+    "sku": "suk-568930"
 }
 
 ### Delete an Item
-DELETE http://localhost:5000/api/items/66fe0806fa9da2c6a4b4cc01
+DELETE http://localhost:5000/api/items/67013160d07788fecea3d75a
