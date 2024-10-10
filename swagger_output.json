@@ -5,7 +5,7 @@
     "description": "API documentation for managing items",
     "version": "1.0.0"
   },
-  "host": "https://cse341pro1-week-3.onrender.com/api/items",
+  "host": "cse341pro1-week-3.onrender.com/api/items",
   "basePath": "/",
   "schemes": [
     "https"
