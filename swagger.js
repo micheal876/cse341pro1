@@ -5,7 +5,7 @@ const doc = {
     title: 'Item API',
     description: 'API documentation for managing items',
   },
-  host: 'localhost:5000', // Update with the correct host/port
+  host: 'localhost:5000/api/items', // Update with the correct host/port
   schemes: ['https', 'https'],
 };
 
