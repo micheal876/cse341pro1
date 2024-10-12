@@ -1,12 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { getItems, createItem, updateItem, deleteItem } = require('../controllers/itemController');
+const { getItems, getItemById, createItem, updateItem, deleteItem } = require('../controllers/itemController');
 
-// GET and POST routes
+// GET all items
 router.get('/', getItems);
-router.post('/', createItem);
-router.put('/:id', updateItem);
-router.delete('/:id', deleteItem);
 
 /**
  * @swagger
@@ -18,6 +15,31 @@ router.delete('/:id', deleteItem);
  *         description: Success
  */
 router.get('/', getItems);
+
+// GET a single item by ID
+router.get('/:id', getItemById);
+
+/**
+ * @swagger
+ * /items/{id}:
+ *   get:
+ *     description: Get an item by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Item retrieved successfully
+ *       404:
+ *         description: Item not found
+ */
+router.get('/:id', getItemById);
+
+// Create a new item
+router.post('/', createItem);
 
 /**
  * @swagger
@@ -34,11 +56,24 @@ router.get('/', getItems);
  *                 type: string
  *               description:
  *                 type: string
+ *               price:
+ *                 type: number
+ *               category:
+ *                 type: string
+ *               stock:
+ *                 type: number
+ *               brand:
+ *                 type: string
+ *               sku:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Item created
  */
 router.post('/', createItem);
+
+// Update an item by ID
+router.put('/:id', updateItem);
 
 /**
  * @swagger
@@ -48,6 +83,7 @@ router.post('/', createItem);
  *     parameters:
  *       - in: path
  *         name: id
+ *         required: true
  *         schema:
  *           type: string
  *     requestBody:
@@ -60,11 +96,26 @@ router.post('/', createItem);
  *                 type: string
  *               description:
  *                 type: string
+ *               price:
+ *                 type: number
+ *               category:
+ *                 type: string
+ *               stock:
+ *                 type: number
+ *               brand:
+ *                 type: string
+ *               sku:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Item updated
+ *       404:
+ *         description: Item not found
  */
 router.put('/:id', updateItem);
+
+// Delete an item by ID
+router.delete('/:id', deleteItem);
 
 /**
  * @swagger
@@ -74,11 +125,14 @@ router.put('/:id', updateItem);
  *     parameters:
  *       - in: path
  *         name: id
+ *         required: true
  *         schema:
  *           type: string
  *     responses:
  *       200:
  *         description: Item deleted
+ *       404:
+ *         description: Item not found
  */
 router.delete('/:id', deleteItem);
 

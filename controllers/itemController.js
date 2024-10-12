@@ -2,12 +2,25 @@ const Item = require('../models/Item');
 
 // GET all items
 exports.getItems = async (req, res) => {
-   try {
-      const items = await Item.find();
-      res.status(200).json({ message: 'Items retrieved successfully', items });
-   } catch (err) {
-      res.status(500).json({ message: 'Error retrieving items', error: err.message });
-   }
+    try {
+        const items = await Item.find();
+        res.status(200).json({ message: 'Items retrieved successfully', items });
+    } catch (err) {
+        res.status(500).json({ message: 'Error retrieving items', error: err.message });
+    }
+};
+
+// GET a single item by ID
+exports.getItemById = async (req, res) => {
+    try {
+        const item = await Item.findById(req.params.id);
+        if (!item) {
+            return res.status(404).json({ message: 'Item not found' });
+        }
+        res.status(200).json({ message: 'Item retrieved successfully', item });
+    } catch (err) {
+        res.status(500).json({ message: 'Error retrieving item', error: err.message });
+    }
 };
 
 // Create a new item
