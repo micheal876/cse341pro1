@@ -4,14 +4,13 @@ const Item = require('../models/Item');
 exports.getItems = async (req, res) => {
    try {
       const items = await Item.find();
-      res.json(items);
+      res.status(200).json({ message: 'Items retrieved successfully', items });
    } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).json({ message: 'Error retrieving items', error: err.message });
    }
 };
 
-// controllers/itemController.js
-
+// Create a new item
 exports.createItem = async (req, res) => {
     const { name, description, price, category, stock, brand, sku } = req.body;
 
@@ -31,14 +30,11 @@ exports.createItem = async (req, res) => {
         const newItem = await item.save();
         res.status(201).json({ message: 'Item created successfully', item: newItem });
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.status(400).json({ message: 'Error creating item', error: err.message });
     }
 };
 
-
-// PUT update an item by ID
-// controllers/itemController.js
-
+// Update an item by ID
 exports.updateItem = async (req, res) => {
     const { name, description, price, category, stock, brand, sku } = req.body;
 
@@ -63,10 +59,9 @@ exports.updateItem = async (req, res) => {
 
         res.status(200).json({ message: 'Item updated successfully', item: updatedItem });
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.status(400).json({ message: 'Error updating item', error: err.message });
     }
 };
-
 
 // DELETE an item by ID
 exports.deleteItem = async (req, res) => {
@@ -75,8 +70,8 @@ exports.deleteItem = async (req, res) => {
         if (!deletedItem) {
             return res.status(404).json({ message: 'Item not found' });
         }
-        res.json({ message: 'Item deleted' });
+        res.status(200).json({ message: 'Item deleted successfully' });
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.status(500).json({ message: 'Error deleting item', error: err.message });
     }
 };

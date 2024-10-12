@@ -18,7 +18,8 @@ dotenv.config();
 
 // Initialize Express
 const app = express();
-
+ 
+app.use('/api/items', itemRoutes);
 // Middleware
 app.use(cors()); // Use CORS before routes
 app.use(bodyParser.json());
