@@ -16,7 +16,7 @@ passport.deserializeUser((id, done) => {
 passport.use(new GitHubStrategy({
     clientID:'Ov23li4wErq0TkdTnlDv',
     clientSecret:'2b30185c27d64f72680cf95492e23eec2ceca349',
-    callbackURL: 'https://cse341pro1-week-3.onrender.com/auth/github/callback',
+    callbackURL: 'http://localhost:5000/auth/github/callback',
 }, (accessToken, refreshToken, profile, done) => {
     // Check if user already exists in our db
     User.findOne({ githubId: profile.id }).then((existingUser) => {
