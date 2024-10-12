@@ -11,43 +11,38 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const userRoutes = require('./routes/userRoutes');
 const itemRoutes = require('./routes/itemRoutes');
 const dotenv = require('dotenv');
+const authRoutes = require('./routes/auth');
 
 // Load environment variables
 dotenv.config();
 
 // Initialize Express
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // Middleware
 app.use(cors()); // Use CORS before routes
-app.use(express.json()); // Parse JSON requests
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Session middleware must be defined before passport
 app.use(session({
    secret: '2b30185c27d64f72680cf95492e23eec2ceca349',
    resave: false,
    saveUninitialized: true,
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Routes for GitHub authentication
+// Include Auth Routes
+app.use('/', authRoutes);
+
+// GitHub authentication routes
 app.get('/auth/github', passport.authenticate('github', { scope: ['profile', 'email'] }));
 
 app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/' }), (req, res) => {
    // Successful authentication
    res.redirect('/dashboard'); // Redirect to a protected route
-});
-
-// Logout route
-app.get('/logout', (req, res) => {
-   req.session.destroy(err => {
-       if (err) {
-           return res.status(500).send('Logout failed');
-       }
-       res.redirect('/');
-   });
 });
 
 // Protected route
@@ -66,54 +61,6 @@ const swaggerOptions = {
            title: 'Items API',
            description: 'API documentation for items with authentication',
            version: '1.0.0',
-       },
-       paths: {
-           '/auth/github': {
-               get: {
-                   summary: 'Authenticate with GitHub',
-                   responses: {
-                       200: {
-                           description: 'Successful authentication',
-                       },
-                   },
-               },
-           },
-           '/auth/github/callback': {
-               get: {
-                   summary: 'GitHub OAuth callback',
-                   responses: {
-                       200: {
-                           description: 'Successful login',
-                       },
-                   },
-               },
-           },
-           '/logout': {
-               get: {
-                   summary: 'Logout user',
-                   responses: {
-                       200: {
-                           description: 'Successfully logged out',
-                       },
-                   },
-               },
-           },
-           '/protected-route': {
-               get: {
-                   summary: 'Protected route',
-                   security: [
-                       { api_key: [] },
-                   ],
-                   responses: {
-                       200: {
-                           description: 'Authorized access',
-                       },
-                       401: {
-                           description: 'Unauthorized',
-                       },
-                   },
-               },
-           },
        },
    },
    apis: ['./routes/*.js'], // Path to your API docs

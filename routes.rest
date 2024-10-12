@@ -15,15 +15,8 @@ Content-Type: application/json
   "password": "password1"     // Replace with actual password
 }
 
-### User Logout
-GET http://localhost:5000/logout HTTP/1.1
-Accept: application/json
-
-
-
-
-
-
+### Logout User
+POST http://localhost:5000/logout
 
 
 
@@ -51,9 +44,9 @@ PUT http://localhost:5000/api/items/67013160d07788fecea3d75a
 Content-Type: application/json
 
 {
-    "name": "iphone 13 pro max",
+    "name": "iphone 16 pro max",
     "description": "High-quality phone with 1TB space 6g ram.",
-    "price": 500.99,
+    "price": 2000.99,
     "category": "Electronics",
     "stock": 34,
     "brand": "iphone",
@@ -62,3 +55,10 @@ Content-Type: application/json
 
 ### Delete an Item
 DELETE http://localhost:5000/api/items/67013160d07788fecea3d75a
+
+
+
+
+### Logout User
+POST http://localhost:5000/logout
+
